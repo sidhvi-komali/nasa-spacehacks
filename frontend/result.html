@@ -3,51 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <title>Weather Results — Will It Rain On My Parade?</title>
-  <link rel="stylesheet" href="style.css">
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      text-align: center;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background: linear-gradient(135deg, #89f7fe, #66a6ff);
       color: #222;
-      padding: 50px;
+    }
+
+    .card {
+      background: white;
+      padding: 40px 50px;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      max-width: 500px;
+      width: 90%;
     }
 
     h1 {
-      margin-bottom: 20px;
-      color: #fff;
-      text-shadow: 1px 1px 2px #00000044;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #1e90ff;
     }
 
     table {
-      margin: 0 auto;
+      width: 100%;
       border-collapse: collapse;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-      overflow: hidden;
-      min-width: 500px;
     }
 
     th, td {
-      padding: 14px 20px;
+      padding: 12px 15px;
       border-bottom: 1px solid #ddd;
+      text-align: left;
     }
 
     th {
       background: #1e90ff;
       color: white;
-      text-transform: uppercase;
-      letter-spacing: 1px;
       font-size: 14px;
+      letter-spacing: 1px;
     }
 
     tr:last-child td {
       border-bottom: none;
-    }
-
-    tr:hover {
-      background: #f3faff;
     }
 
     .condition {
@@ -55,16 +58,18 @@
     }
 
     .back-btn {
-      display: inline-block;
-      margin-top: 30px;
+      display: block;
+      margin: 25px auto 0 auto;
       padding: 10px 20px;
       background: #fff;
       color: #1e90ff;
       border: 2px solid #1e90ff;
       border-radius: 8px;
-      text-decoration: none;
+      text-align: center;
       font-weight: bold;
+      text-decoration: none;
       transition: all 0.3s;
+      width: fit-content;
     }
 
     .back-btn:hover {
@@ -75,35 +80,35 @@
   </style>
 </head>
 <body>
-  <h1>Weather Report</h1>
-
-  <table>
-    <tr>
-      <th>Location</th>
-      <td>{{ location }}</td>
-    </tr>
-    <tr>
-      <th>Date</th>
-      <td>{{ date }}</td>
-    </tr>
-    <tr>
-      <th>Condition</th>
-      <td class="condition">{{ condition }}</td>
-    </tr>
-    <tr>
-      <th>Temperature</th>
-      <td>{{ temp_c }}°C / {{ temp_f }}°F</td>
-    </tr>
-    <tr>
-      <th>Precipitation</th>
-      <td>{{ precipitation }} mm</td>
-    </tr>
-    <tr>
-      <th>Data Source</th>
-      <td>{{ source }}</td>
-    </tr>
-  </table>
-
-  <a href="/" class="back-btn">← Back to Home</a>
+  <div class="card">
+    <h1>Weather Report</h1>
+    <table>
+      <tr>
+        <th>Location</th>
+        <td>{{ location }}</td>
+      </tr>
+      <tr>
+        <th>Date</th>
+        <td>{{ date }}</td>
+      </tr>
+      <tr>
+        <th>Condition</th>
+        <td class="condition">{{ condition }}</td>
+      </tr>
+      <tr>
+        <th>Temperature</th>
+        <td>{{ temp_c }}°C / {{ temp_f }}°F</td>
+      </tr>
+      <tr>
+        <th>Precipitation</th>
+        <td>{{ precipitation }} mm</td>
+      </tr>
+      <tr>
+        <th>Data Source</th>
+        <td>{{ source }}</td>
+      </tr>
+    </table>
+    <a href="/" class="back-btn">← Back to Home</a>
+  </div>
 </body>
 </html>
