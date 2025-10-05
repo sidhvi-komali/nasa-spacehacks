@@ -21,8 +21,14 @@
       padding: 40px 50px;
       border-radius: 12px;
       box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-      max-width: 500px;
+      max-width: 520px;
       width: 90%;
+      animation: fadeIn 0.6s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     h1 {
@@ -55,6 +61,8 @@
 
     .condition {
       font-weight: bold;
+      color: #1e90ff;
+      text-transform: capitalize;
     }
 
     .back-btn {
@@ -102,6 +110,14 @@
       <tr>
         <th>Precipitation</th>
         <td>{{ precipitation }} mm</td>
+      </tr>
+      <tr>
+        <th>Wind Speed</th>
+        <td>{{ wind }} m/s</td>
+      </tr>
+      <tr>
+        <th>Humidity</th>
+        <td>{{ humidity }}%</td>
       </tr>
       <tr>
         <th>Data Source</th>
