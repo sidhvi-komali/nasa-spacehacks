@@ -1,28 +1,109 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Will It Rain On My Parade?</title>
+  <title>Weather Results — Will It Rain On My Parade?</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-  body {
-    font-family: sans-serif;
-    text-align: center;
-    margin-top: 80px;
-    background: yellow;
-  }
-  input, button {
-    padding: 10px;
-    margin: 8px;
-  }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #89f7fe, #66a6ff);
+      color: #222;
+      padding: 50px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #fff;
+      text-shadow: 1px 1px 2px #00000044;
+    }
+
+    table {
+      margin: 0 auto;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      overflow: hidden;
+      min-width: 500px;
+    }
+
+    th, td {
+      padding: 14px 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background: #1e90ff;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 14px;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover {
+      background: #f3faff;
+    }
+
+    .condition {
+      font-weight: bold;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background: #fff;
+      color: #1e90ff;
+      border: 2px solid #1e90ff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+
+    .back-btn:hover {
+      background: #1e90ff;
+      color: white;
+      box-shadow: 0 0 10px #1e90ff;
+    }
   </style>
 </head>
 <body>
-  <h1>Will It Rain On My Parade?</h1>
-  <form action="/weather" method="POST">
-    <label>Location:</label>
-    <input type="text" name="location" required><br>
-    <label>Date:</label>
-    <input type="date" name="date" required><br>
-    <button type="submit">Check Weather</button>
-  </form>
+  <h1>Weather Report</h1>
+
+  <table>
+    <tr>
+      <th>Location</th>
+      <td>{{ location }}</td>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <td>{{ date }}</td>
+    </tr>
+    <tr>
+      <th>Condition</th>
+      <td class="condition">{{ condition }}</td>
+    </tr>
+    <tr>
+      <th>Temperature</th>
+      <td>{{ temp_c }}°C / {{ temp_f }}°F</td>
+    </tr>
+    <tr>
+      <th>Precipitation</th>
+      <td>{{ precipitation }} mm</td>
+    </tr>
+    <tr>
+      <th>Data Source</th>
+      <td>{{ source }}</td>
+    </tr>
+  </table>
+
+  <a href="/" class="back-btn">← Back to Home</a>
 </body>
 </html>
