@@ -7,31 +7,3 @@ input {
     padding: 10px;
     margin: 8px;
 }
-/* Animated Gradient Button */
-.animated-gradient {
-    padding: 15px 40px;          /* Adjust size */
-    font-size: 1.2rem;           /* Text size */
-    color: white;                /* Text color */
-    font-weight: bold;
-    border: none;                /* Remove default border */
-    border-radius: 12px;         /* Rounded corners */
-    background: linear-gradient(45deg, #ff6b6b, #f7d794, #1e90ff);
-    background-size: 600% 600%;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
-    animation: gradientMove 5s ease infinite;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-/* Hover effect */
-.animated-gradient:hover {
-    transform: translateY(-2px);         /* Slight lift */
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-}
-
-/* Keyframes for moving gradient */
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
