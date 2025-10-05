@@ -2,108 +2,77 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Weather Results — Will It Rain On My Parade?</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Will It Rain On My Parade?</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      text-align: center;
       background: linear-gradient(135deg, #89f7fe, #66a6ff);
       color: #222;
-      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
     }
 
     h1 {
-      margin-bottom: 20px;
-      color: #fff;
-      text-shadow: 1px 1px 2px #00000044;
+      color: white;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 2px #00000055;
     }
 
-    table {
-      margin: 0 auto;
-      border-collapse: collapse;
+    form {
       background: white;
+      padding: 30px 40px;
       border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-      overflow: hidden;
-      min-width: 500px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      text-align: left;
+      min-width: 300px;
     }
 
-    th, td {
-      padding: 14px 20px;
-      border-bottom: 1px solid #ddd;
-    }
-
-    th {
-      background: #1e90ff;
-      color: white;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 14px;
-    }
-
-    tr:last-child td {
-      border-bottom: none;
-    }
-
-    tr:hover {
-      background: #f3faff;
-    }
-
-    .condition {
+    label {
+      display: block;
+      margin-top: 10px;
       font-weight: bold;
     }
 
-    .back-btn {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 10px 20px;
-      background: #fff;
-      color: #1e90ff;
-      border: 2px solid #1e90ff;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s;
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
     }
 
-    .back-btn:hover {
-      background: #1e90ff;
+    button {
+      margin-top: 20px;
+      border: 2px solid #00f0ff;
+      background: transparent;
+      color: #00f0ff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #00f0ff;
       color: white;
-      box-shadow: 0 0 10px #1e90ff;
+      box-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
     }
   </style>
 </head>
 <body>
-  <h1>Weather Report</h1>
+  <h1>Will It Rain On My Parade?</h1>
+  <form action="/weather" method="POST">
+    <label for="location">Location:</label>
+    <input type="text" id="location" name="location" required>
 
-  <table>
-    <tr>
-      <th>Location</th>
-      <td>{{ location }}</td>
-    </tr>
-    <tr>
-      <th>Date</th>
-      <td>{{ date }}</td>
-    </tr>
-    <tr>
-      <th>Condition</th>
-      <td class="condition">{{ condition }}</td>
-    </tr>
-    <tr>
-      <th>Temperature</th>
-      <td>{{ temp_c }}°C / {{ temp_f }}°F</td>
-    </tr>
-    <tr>
-      <th>Precipitation</th>
-      <td>{{ precipitation }} mm</td>
-    </tr>
-    <tr>
-      <th>Data Source</th>
-      <td>{{ source }}</td>
-    </tr>
-  </table>
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" required>
 
-  <a href="/" class="back-btn">← Back to Home</a>
+    <button type="submit">Check Weather</button>
+  </form>
 </body>
 </html>
