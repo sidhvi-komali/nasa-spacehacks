@@ -82,11 +82,12 @@ def weather():
     if precipitation > 5:
         condition = f"likely rainy ☔ ({precipitation:.1f} mm)"
     elif temp_max > 32:
-        condition = f"very hot 🥵 (max {temp_max:.1f}°C)"
+        condition = "very hot 🥵"
     elif temp_min < 0:
-        condition = f"very cold 🧊 (min {temp_min:.1f}°C)"
+        condition = "very cold 🧊"
     else:
-        condition = f"comfortable 🌤️ ({temp_min:.1f}°C–{temp_max:.1f}°C, low rain)"
+        condition = "comfortable 🌤️"
+
 
     # Convert temperature to Fahrenheit
     temp_f = (temp_avg * 9 / 5) + 32
