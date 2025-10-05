@@ -88,11 +88,20 @@ def weather():
     else:
         condition = f"comfortable 🌤️ ({temp_min:.1f}°C–{temp_max:.1f}°C, low rain)"
 
-    return render_template('result.html',
-                           location=location,
-                           date=date_str,
-                           condition=condition,
-                           source=source)
+    # Convert temperature to Fahrenheit
+    temp_f = (temp_avg * 9 / 5) + 32
+
+    return render_template(
+        'result.html',
+        location=location,
+        date=date_str,
+        condition=condition,
+        temp_c=round(temp_avg, 1),
+        temp_f=round(temp_f, 1),
+        precipitation=round(precipitation, 1),
+        source=source
+    )
+
 
 if __name__ == '__main__':
     app.run(debug=True)
