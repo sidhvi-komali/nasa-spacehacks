@@ -36,7 +36,7 @@ def weather():
 
         nasa_url = (
             f"https://power.larc.nasa.gov/api/temporal/daily/point"
-            f"?parameters=T2M,T2M_MAX,T2M_MIN,PRECTOTCORR"
+            f"?parameters=T2M,T2M_MAX,T2M_MIN,PRECTOTCORR,WS2M,RH2M"
             f"&community=RE"
             f"&longitude={lon}&latitude={lat}"
             f"&start={start}&end={end}&format=JSON"
@@ -53,6 +53,8 @@ def weather():
         temp_max = list(params["T2M_MAX"].values())[0]
         temp_min = list(params["T2M_MIN"].values())[0]
         precipitation = list(params["PRECTOTCORR"].values())[0]
+        wind = list(params["WS2M"].values())[0]
+        humidity = list(params["RH2M"].values())[0]
 
         source = "NASA POWER (Historical)"
 
@@ -61,7 +63,7 @@ def weather():
         weather_url = (
             f"https://api.open-meteo.com/v1/forecast"
             f"?latitude={lat}&longitude={lon}"
-            f"&daily=temperature_2m_max,temperature_2m_min,precipitation_sum"
+            f"&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max,relative_humidity_2m_max"
             f"&timezone=auto&start_date={date_str}&end_date={date_str}"
         )
         weather_response = requests.get(weather_url)
@@ -75,16 +77,22 @@ def weather():
         temp_max = daily["temperature_2m_max"][0]
         temp_min = daily["temperature_2m_min"][0]
         precipitation = daily["precipitation_sum"][0]
+        wind = daily["windspeed_10m_max"][0]
+        humidity = daily["relative_humidity_2m_max"][0]
         temp_avg = (temp_max + temp_min) / 2
         source = "Open-Meteo (Forecast)"
 
     # Step 3: Interpret data
     if precipitation > 5:
-        condition = f"likely rainy ☔ ({precipitation:.1f} mm)"
+        condition = f"very wet ☔ ({precipitation:.1f} mm)"
     elif temp_max > 32:
         condition = "very hot 🥵"
     elif temp_min < 0:
         condition = "very cold 🧊"
+    elif wind > 10:
+        condition = "very windy 🌬️"
+    elif humidity > 80:
+        condition = "very humid 💧"
     else:
         condition = "comfortable 🌤️"
 
@@ -93,15 +101,18 @@ def weather():
     temp_f = (temp_avg * 9 / 5) + 32
 
     return render_template(
-        'result.html',
-        location=location,
-        date=date_str,
-        condition=condition,
-        temp_c=round(temp_avg, 1),
-        temp_f=round(temp_f, 1),
-        precipitation=round(precipitation, 1),
-        source=source
+    'result.html',
+    location=location,
+    date=date_str,
+    condition=condition,
+    temp_c=round(temp_avg, 1),
+    temp_f=round(temp_f, 1),
+    precipitation=round(precipitation, 1),
+    humidity=round(humidity, 1),
+    wind=round(wind, 1),
+    source=source
     )
+
 
 
 if __name__ == '__main__':
