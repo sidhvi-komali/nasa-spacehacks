@@ -26,7 +26,7 @@ def safe_get_param(params, key):
     return parse_num(val)
 
 
-@app.route('/frontend/index.html')
+@app.route('/')
 def home():
     return render_template('index.html')
 
