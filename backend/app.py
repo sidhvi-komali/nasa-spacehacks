@@ -26,12 +26,12 @@ def safe_get_param(params, key):
     return parse_num(val)
 
 
-@app.route('/')
+@app.route('/frontend/index.html')
 def home():
     return render_template('index.html')
 
 
-@app.route('/weather', methods=['POST'])
+@app.route('/frontend/result.html', methods=['POST'])
 def weather():
     location = request.form.get('location', '').strip()
     date_str = request.form.get('date', '').strip()
