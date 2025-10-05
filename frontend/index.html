@@ -1,1 +1,17 @@
-
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Will It Rain On My Parade?</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Will It Rain On My Parade?</h1>
+  <form action="/weather" method="POST">
+    <label>Location:</label>
+    <input type="text" name="location" required><br>
+    <label>Date:</label>
+    <input type="date" name="date" required><br>
+    <button class="animated-gradient" type="submit">Check Weather</button>
+  </form>
+</body>
+</html>
