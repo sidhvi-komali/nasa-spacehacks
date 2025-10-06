@@ -4,127 +4,177 @@
   <meta charset="UTF-8">
   <title>Weather Results — Will It Rain On My Parade?</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: "Segoe UI", sans-serif;
       margin: 0;
       padding: 0;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #89f7fe, #66a6ff);
-      color: #222;
+      background: linear-gradient(135deg, #6dd5fa, #2980b9);
+      color: #333;
     }
 
     .card {
-      background: white;
-      padding: 40px 50px;
-      border-radius: 12px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-      max-width: 520px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      padding: 30px 40px;
       width: 90%;
-      animation: fadeIn 0.6s ease;
+      max-width: 500px;
+      animation: fadeIn 0.7s ease;
+      text-align: center;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     h1 {
-      text-align: center;
-      margin-bottom: 30px;
-      color: #1e90ff;
+      color: #2980b9;
+      margin-bottom: 8px;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      padding: 12px 15px;
-      border-bottom: 1px solid #ddd;
-      text-align: left;
-    }
-
-    th {
-      background: #1e90ff;
-      color: white;
+    .subtitle {
+      color: #555;
       font-size: 14px;
-      letter-spacing: 1px;
+      margin-bottom: 25px;
     }
 
-    tr:last-child td {
-      border-bottom: none;
+    .weather-info {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 25px;
     }
 
-    .condition {
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      background: #f7f9fc;
+      border-radius: 10px;
+      padding: 10px 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      align-items: center;
+    }
+
+    .label {
+      color: #555;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .value {
       font-weight: bold;
-      color: #1e90ff;
-      text-transform: capitalize;
+      color: #2980b9;
+    }
+
+    .icon {
+      font-size: 1.2em;
+    }
+
+    .map-container {
+      margin-top: 25px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    #map {
+      width: 100%;
+      height: 250px;
     }
 
     .back-btn {
-      display: block;
-      margin: 25px auto 0 auto;
-      padding: 10px 20px;
-      background: #fff;
-      color: #1e90ff;
-      border: 2px solid #1e90ff;
+      display: inline-block;
+      margin-top: 25px;
+      padding: 10px 22px;
       border-radius: 8px;
-      text-align: center;
-      font-weight: bold;
+      font-weight: 600;
+      color: #fff;
+      background: #2980b9;
       text-decoration: none;
-      transition: all 0.3s;
-      width: fit-content;
+      transition: 0.3s;
     }
 
     .back-btn:hover {
-      background: #1e90ff;
-      color: white;
-      box-shadow: 0 0 10px #1e90ff;
+      background: #1f6da0;
+      box-shadow: 0 0 10px rgba(41,128,185,0.5);
     }
   </style>
 </head>
 <body>
   <div class="card">
-    <h1>Weather Report</h1>
-    <table>
-      <tr>
-        <th>Location</th>
-        <td>{{ location }}</td>
-      </tr>
-      <tr>
-        <th>Date</th>
-        <td>{{ date }}</td>
-      </tr>
-      <tr>
-        <th>Condition</th>
-        <td class="condition">{{ condition }}</td>
-      </tr>
-      <tr>
-        <th>Temperature</th>
-        <td>{{ temp_c }}°C / {{ temp_f }}°F</td>
-      </tr>
-      <tr>
-        <th>Precipitation</th>
-        <td>{{ precipitation }} mm</td>
-      </tr>
-      <tr>
-        <th>Wind Speed</th>
-        <td>{{ wind }} m/s</td>
-      </tr>
-      <tr>
-        <th>Humidity</th>
-        <td>{{ humidity }}%</td>
-      </tr>
-      <tr>
-        <th>Data Source</th>
-        <td>{{ source }}</td>
-      </tr>
-    </table>
-    <a href="/" class="back-btn">← Back to Home</a>
+    <h1>Weather in {{ location }}</h1>
+    <div class="subtitle">{{ date }}</div>
+
+    <div class="weather-info">
+      <div class="info-item">
+        <div class="label"><span class="icon">☁️</span> Condition</div>
+        <div class="value">{{ condition }}</div>
+      </div>
+      <div class="info-item">
+        <div class="label"><span class="icon">🌡️</span> Temperature</div>
+        <div class="value">{{ temp_c }}°C / {{ temp_f }}°F</div>
+      </div>
+      <div class="info-item">
+        <div class="label"><span class="icon">💧</span> Precipitation</div>
+        <div class="value">{{ precipitation }} mm</div>
+      </div>
+      <div class="info-item">
+        <div class="label"><span class="icon">💨</span> Wind</div>
+        <div class="value">{{ wind }} m/s</div>
+      </div>
+      <div class="info-item">
+        <div class="label"><span class="icon">💦</span> Humidity</div>
+        <div class="value">{{ humidity }}%</div>
+      </div>
+      <div class="info-item">
+        <div class="label"><span class="icon">🛰️</span> Data Source</div>
+        <div class="value">{{ source }}</div>
+      </div>
+    </div>
+
+    <div class="map-container">
+      <div id="map"></div>
+    </div>
+
+    <a href="/" class="back-btn">← Back</a>
   </div>
+
+  <!-- Load Google Maps JS API -->
+  <script async
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+  </script>
+
+  <script>
+    function initMap() {
+      const lat = parseFloat('{{ lat }}');
+      const lon = parseFloat('{{ lon }}');
+      if (!isNaN(lat) && !isNaN(lon)) {
+        const location = { lat: lat, lng: lon };
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 8,
+          center: location,
+          mapTypeId: "roadmap",
+        });
+        new google.maps.Marker({
+          position: location,
+          map: map,
+          title: "{{ location }}",
+        });
+      } else {
+        document.getElementById("map").innerText = "Map unavailable for this location.";
+      }
+    }
+  </script>
 </body>
 </html>
